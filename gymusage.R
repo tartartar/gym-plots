@@ -1,4 +1,7 @@
 gym_orig <- read.csv("gymusage.csv")
+# > head(gym_orig, 1)
+#            Entry.Date           Exit.Date Visit.Duration
+# 1 28/11/2016 20:25:16 28/11/2016 21:20:22        55 mins
 
 convertToTime <- function(x) {
   as.POSIXct(x, tz = "", format = "%d/%m/%Y %T")

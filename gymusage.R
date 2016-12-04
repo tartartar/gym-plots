@@ -1,4 +1,4 @@
-gym_orig <- read.csv("/home/rick/Desktop/gymusage.csv")
+gym_orig <- read.csv("gymusage.csv")
 
 convertToTime <- function(x) {
   as.POSIXct(x, tz = "", format = "%d/%m/%Y %T")

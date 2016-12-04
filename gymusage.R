@@ -42,7 +42,7 @@ date_vs_duration_dotplot <- ggplot(gym, aes(x = gym[1], y = gym[3])) +
   theme_bw() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-  # stat_smooth(method = "lm", se = F, col = "red")
+# stat_smooth(method = "lm", se = F, col = "red")
 
 gym[5] <- as.factor(format(gym[[1]], format = "%a"))
 names(gym)[5] <- "Day of week"
@@ -95,7 +95,7 @@ duration_histogram <- ggplot(gym, aes(x = gym$`Duration (in mins)`)) +
 #                 label = percent(stat_days$freq/100)), size=5)
 
 
-pdf("date_vs_duration_dotplot.pdf")
+pdf("date_vs_duration_dotplot.pdf", width = 11)
 print(date_vs_duration_dotplot)
 dev.off()
 

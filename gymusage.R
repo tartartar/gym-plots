@@ -36,7 +36,8 @@ library(scales)
 
 # Date vs Duration (mins)
 date_vs_duration_dotplot <- ggplot(gym, aes(x = gym[1], y = gym[3])) + 
-  geom_point() +
+  geom_point() + 
+  stat_smooth(method = "lm", se = F, col = "red") +
   scale_x_datetime(names(gym)[1], date_breaks = "2 weeks", date_labels = "%d %b") + 
   scale_y_continuous(names(gym)[3], limits = c(0, max(gym[3])*1.1), breaks = seq(0, max(gym[3])*1.1, 10), expand = c(0,0)) +
   theme_bw() +
@@ -62,12 +63,13 @@ entry_vs_duration_boxplot <- ggplot(gym, aes(x = gym$`Day of week`, y = gym$`Dur
   theme_bw()
 
 # Entry day vs duration, violin plot
-entry_vs_duration_violinplot <- ggplot(gym, aes(x = gym$`Day of week`, y = gym$`Duration (in mins)`)) +
-  geom_violin(fill = "grey80", alpha = 0.5) +
+entry_vs_duration_violinplot <- ggplot(gym, aes(x = gym$`Day of week`, y = gym$`Duration (in mins)`, fill = gym[[5]])) +
+  geom_violin(aes(weight = gym[[3]]), scale = "count", alpha = 0.5) +
   geom_jitter(position = position_jitter(width = 0.1), alpha = 0.5) +
   scale_y_continuous(names(gym)[3], limits = c(0, max(gym[3])*1.1), breaks = seq(0, max(gym[3])*1.1, 10), expand = c(0,0)) +
   scale_x_discrete("Entry day", limits=c("Mon","Tue","Wed","Thu","Fri","Sat","Sun")) + # providing an explicit factor ordering
-  theme_bw()
+  theme_bw() +
+  theme(legend.position="none")
 
 library(plyr)
 stat_days <- count(gym$`Day of week`)
